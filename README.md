@@ -1,28 +1,46 @@
-# AngularRouting
+This repository covers more advanced Angular concepts such as routing, guards, and lazy loading modules. It is the second part of my Angular learning journey, which I completed using the FreeCodeCamp 17-hour Angular course.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
+## Topics Covered
 
-## Development server
+- **Routing:**
+  - Defining routes with `RouterModule`
+  - Route parameters and query parameters
+  - Programmatic navigation using the Angular Router
+  - Child routes
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Lazy Loading:**
+  - Splitting Angular modules using lazy loading
+  - Configuring lazy-loaded routes
+  - Implementing lazy-loaded **User** and **Admin** modules
 
-## Code scaffolding
+- **Route Guards:**
+  - **CanActivate** and **CanDeactivate** guards for protecting routes
+  - **CanLoad** guard for lazy-loaded modules
+  - Implementing **Resolve** for pre-fetching data
+  - Auth guards for route-based authentication
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Authentication:**
+  - Login and logout functionality
+  - Role-based access for routes
+  - Managing session state and route access
 
-## Build
+- **Additional Features:**
+  - Reactive forms with custom validation
+  - MatSnackBar for notifications
+  - Dynamic forms with FormArray
+  - Error handling and alerts
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Admin Access
 
-## Running unit tests
+The Admin Module requires login to access. Use the following credentials to log in:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Email:** admin@gmail.com
+- **Password:** admin123
 
-## Running end-to-end tests
+Once logged in, you can manage room bookings and add new rooms in the Admin panel.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## How to Run
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# AngularRoutes
+1. Clone the repository
+2. Run `npm install` to install the necessary dependencies
+3. Use `ng serve` to start the development server
