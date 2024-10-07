@@ -1,0 +1,215 @@
+<form [formGroup]="bookingForm" (ngSubmit)="submitBooking()">
+  <h2>Booking Form</h2>
+
+  <!-- Booking Details -->
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Room ID</mat-label>
+    <input matInput formControlName="roomId" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Guest Name</mat-label>
+    <input matInput formControlName="guestName" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Guest Email</mat-label>
+    <input matInput formControlName="guestEmail" required />
+    <span
+      *ngIf="bookingForm.get('guestEmail')?.errors?.['email'] && bookingForm.get('guestEmail')?.touched"
+      class="text-danger"
+    >
+      Enter a valid email
+    </span>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Guest Phone</mat-label>
+    <input matInput formControlName="guestPhone" required />
+    <mat-error *ngIf="bookingForm.get('guestPhone')?.errors?.['pattern']">
+      Enter a valid phone number
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Booking Status</mat-label>
+    <input matInput formControlName="bookingStatus" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Booking Amount</mat-label>
+    <input matInput formControlName="bookingAmount" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Booking Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="bookingPicker"
+      formControlName="bookingDate"
+      required
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="bookingPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker touchUi #bookingPicker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Check-in Details -->
+  <h3>Check-in Details</h3>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Check-in Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="checkinPicker"
+      formControlName="checkinDate"
+      required
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="checkinPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker touchUi #checkinPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mx-2 formfields">
+    <mat-label>Check-out Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="checkoutPicker"
+      formControlName="checkoutDate"
+      required
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="checkoutPicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker touchUi #checkoutPicker></mat-datepicker>
+    <mat-error *ngIf="bookingForm.get('checkoutDate')?.errors?.['invalidTime']">
+      Check-in date should be less than check-out date
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Address Details -->
+  <div formGroupName="address">
+    <h3>Address Details</h3>
+    <mat-form-field appearance="outline" class="mx-2 formfields">
+      <mat-label>Guest Address</mat-label>
+      <input matInput formControlName="guestAddress" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mx-2 formfields">
+      <mat-label>Guest City</mat-label>
+      <input matInput formControlName="guestCity" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mx-2 formfields">
+      <mat-label>Guest State</mat-label>
+      <input matInput formControlName="guestState" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="mx-2 formfields">
+      <mat-label>Guest Country</mat-label>
+      <input matInput formControlName="guestCountry" required />
+    </mat-form-field>
+  </div>
+
+  <!-- Guest List -->
+  <h3>Guest List</h3>
+
+  <div
+    formArrayName="guestList"
+    *ngFor="let guest of guests.controls; index as i"
+  >
+    <div [formGroupName]="i">
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Guest Name</mat-label>
+        <input matInput formControlName="guestName" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Guest Age</mat-label>
+        <input matInput type="number" formControlName="guestAge" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Guest Phone</mat-label>
+        <input matInput formControlName="guestPhone" required />
+      </mat-form-field>
+
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm m-3"
+        *ngIf="guests.length > 1"
+        (click)="removeGuest(i)"
+      >
+        Remove Guest
+      </button>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="btn btn-outline-dark btn-sm m-3"
+    (click)="addGuest()"
+  >
+    Add Guest
+  </button>
+  <!-- Passport Details -->
+
+  <div>
+    <h3>Passport Details</h3>
+    <button
+      type="button"
+      class="btn btn-warning m-3"
+      (click)="addPassport()"
+      *ngIf="!bookingForm.get('passport')"
+    >
+      Add Passport
+    </button>
+    <div formGroupName="passport" *ngIf="bookingForm.get('passport')">
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Passport Number</mat-label>
+        <input matInput formControlName="passportNumber" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Passport Country</mat-label>
+        <input matInput formControlName="passportCountry" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mx-2 formfields">
+        <mat-label>Passport Expiry</mat-label>
+        <input
+          matInput
+          [matDatepicker]="passportPicker"
+          formControlName="passportExpiry"
+          required
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="passportPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker touchUi #passportPicker></mat-datepicker>
+      </mat-form-field>
+
+      <button
+        type="button"
+        class="btn btn-outline-danger btn-sm m-3"
+        (click)="removePassport()"
+      >
+        Remove Passport
+      </button>
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <button
+    type="submit"
+    class="btn btn-dark m-3"
+    [disabled]="!bookingForm.valid"
+  >
+    Submit Booking
+  </button>
+</form>

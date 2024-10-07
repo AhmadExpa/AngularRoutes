@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <!-- Search -->
+      <app-search (searched)="onSearch($event)"></app-search>
+      <!-- Message -->
+      <div *ngIf="message" class="alert alert-success">
+        {{ message }}
+      </div>
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table table-dark table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Room Type</th>
+              <th scope="col">Room Number</th>
+              <th scope="col">Amenities</th>
+              <th scope="col">Check-in Date</th>
+              <th scope="col">Check-out Date</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+              <!-- New column for the button -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of rooms | searchFilter : price">
+              <td>{{ room.roomType }}</td>
+              <td>{{ room.roomNumber }}</td>
+              <td>{{ room.amenities }}</td>
+              <td>{{ room.checkinTime | date : "dd/MM/yyyy" }}</td>
+              <td>{{ room.checkoutTime | date : "dd/MM/yyyy" }}</td>
+              <td>{{ room.rating }} ⭐</td>
+              <td>{{ room.price | currency }}</td>
+              <td>
+                <!-- Book Room button -->
+                <button
+                  class="btn btn-primary btn-sm"
+                  [routerLink]="['/user/booking', room.roomNumber]"
+                >
+                  Book Room
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>After Getting Login as Admin</p>
+      <button class="btn btn-primary" [routerLink]="['/admin/add-room']">
+        Add Room
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- This router outlet will render the child component BookingComponent -->
+<!-- <router-outlet></router-outlet> -->

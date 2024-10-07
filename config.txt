@@ -1,0 +1,1 @@
+adding the proxy config file at the line number 68 of the angular.json
