@@ -1,4 +1,4 @@
-This repository covers more advanced Angular concepts such as routing, guards, and lazy loading modules. It is the second part of my Angular learning journey, which I completed using the FreeCodeCamp 17-hour Angular course.
+This repository covers more advanced Angular concepts such as routing, guards, and lazy loading modules. It is the second part of my Angular learning journey, which I completed using the FreeCodeCamp Angular course.
 
 ## Topics Covered
 
